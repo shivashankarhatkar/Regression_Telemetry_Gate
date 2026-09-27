@@ -1,0 +1,56 @@
+# The CI/CD regression gate — see week-5-notes.md, section 11, and
+# tests/test_regression.py, which this workflow runs.
+#
+# Two jobs, deliberately separated:
+#   - unit-tests: fast, deterministic, no API keys needed — runs on
+#     every push/PR. Covers pure logic (trajectory metric, usage
+#     aggregator, graph routing, safety valves, tools — inherited from
+#     Week 4) that doesn't need a real model call.
+#   - regression-eval: the actual golden-dataset quality gate — needs
+#     OPENROUTER_API_KEY (both the agent AND the GEval/RAGAS judges call
+#     a real model). This is the job that makes an underperforming
+#     prompt/model change "physically unable to ship," per this week's
+#     brief: a failing score here fails the job, which (with branch
+#     protection requiring this check) blocks the merge.
+
+name: Regression & Telemetry Gate
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Run fast unit tests (no API key required)
+        run: >
+          pytest tests/
+          --ignore=tests/test_regression.py
+          -v
+
+  regression-eval:
+    runs-on: ubuntu-latest
+    needs: unit-tests
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Run golden dataset regression suite
+        run: deepeval test run tests/test_regression.py
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          CHAT_MODEL: "anthropic/claude-sonnet-4.5"
+          # LANGFUSE_* intentionally omitted here — AgentTracer degrades
+          # gracefully to local-only recording without them (see
+          # telemetry/tracing.py), so CI doesn't need a real Langfuse
+          # project just to run the quality gate.
