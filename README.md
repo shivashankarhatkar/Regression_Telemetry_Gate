@@ -1,4 +1,4 @@
-# The Regression & Telemetry Gate — Week 5 Project
+# The Regression & Telemetry Gate 
 
 An automated eval and tracing harness built on top of Week 4's
 Persistent Operator: every agent request is traced end-to-end
