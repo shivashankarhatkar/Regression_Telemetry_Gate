@@ -1,6 +1,6 @@
 # The Regression & Telemetry Gate 
 
-An automated eval and tracing harness built on top of Week 4's
+An automated eval and tracing harness built on top
 Persistent Operator: every agent request is traced end-to-end
 (Langfuse/OpenTelemetry), unit economics (cost/tokens/latency) are
 tracked per step, and a curated golden dataset is replayed through the
