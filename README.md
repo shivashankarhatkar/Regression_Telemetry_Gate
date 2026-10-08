@@ -15,7 +15,7 @@ project implements.
 ## What this project demonstrates
 
 | Concept | Where it lives |
-|---|---|
+|---|---|---|
 | End-to-end tracing (Langfuse, OTel-native SDK) | `telemetry/tracing.py`, wired into `app/graph.py`'s nodes |
 | Unit economics (cost/token/latency per step) | `telemetry/usage_aggregator.py`, exposed via `GET /telemetry` |
 | Golden dataset | `evaluation/golden_dataset.py` |
