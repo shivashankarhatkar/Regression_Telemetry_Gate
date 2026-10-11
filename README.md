@@ -8,10 +8,6 @@ real agent graph on every pull request — scored with DeepEval,
 RAGAS, and a custom trajectory metric — to **block a merge the moment
 a change measurably degrades quality**.
 
-This is Week 5 of a 10-week self-study AI Engineering program. See
-`week-5-notes.md` (provided separately) for the concept notes this
-project implements.
-
 ## What this project demonstrates
 
 | Concept | Where it lives |
