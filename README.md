@@ -24,7 +24,7 @@ a change measurably degrades quality**.
 
 ## Project structure
 
-```
+````
 regression-telemetry-gate/
 ├── app/                              # Week 4's Persistent Operator (unchanged agent logic)
 │   ├── main.py                        # UPDATED: builds/wires AgentTracer, adds GET /telemetry
