@@ -14,7 +14,7 @@ a change measurably degrades quality**.
 |---|---|---|```
 | End-to-end tracing (Langfuse, OTel-native SDK) | `telemetry/tracing.py`, wired into `app/graph.py`'s nodes |
 | Unit economics (cost/token/latency per step) | `telemetry/usage_aggregator.py`, exposed via `GET /telemetry` |
-| Golden dataset | `evaluation/golden_dataset.py` |
+| Golden dataset | `evaluation/golden_dataset.py` ||
 | LLM-as-a-Judge (GEval) | `evaluation/geval_metrics.py` |
 | RAG faithfulness (RAGAS) | `evaluation/ragas_faithfulness_metric.py` |
 | Agent tool-call trajectory evaluation | `evaluation/trajectory_metric.py` |
