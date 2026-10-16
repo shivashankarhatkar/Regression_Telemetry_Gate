@@ -125,6 +125,9 @@ Covers the trajectory metric's comparison logic, usage aggregation math, and eve
 
 ## Definition of Done (Week 5 milestone)
 
+
+
+
 - [x] A single `/chat` request produces one complete, correctly-nested trace (verified via Langfuse if configured, or via `/telemetry`'s aggregated totals otherwise) showing every node and tool call with cost/token/latency attached
 - [x] The golden dataset covers a simple lookup, a dependent multi-tool-call action, and a cross-thread memory recall — one example per major Week 4 capability
 - [x] The CI workflow fails when a deliberately-introduced regression is present (see "Watch the gate actually block a regression" above) and passes on the unmodified baseline
